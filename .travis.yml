@@ -2,8 +2,8 @@ sudo: required
 language: generic
 services:
         - docker
-before_install:
-        - sudo apt-get install qemu-user-binfmt
+before_script:
+        - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
 script:
         - sudo ls /proc/sys/fs/binfmt_misc/
         - ./run.sh
