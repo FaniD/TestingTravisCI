@@ -1,6 +1,8 @@
-language: bash
+sudo: required
+language: generic
 services:
         - docker
 script:
+        - sudo ls /proc/sys/fs
         - ./run.sh
         
