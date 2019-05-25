@@ -3,6 +3,6 @@ language: generic
 services:
         - docker
 script:
-        - sudo ls /proc/sys/fs
+        - sudo ls /proc/sys/fs/binfmt_misc/
         - ./run.sh
         
