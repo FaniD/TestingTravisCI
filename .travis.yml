@@ -5,6 +5,6 @@ services:
 before_script:
         - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
 script:
-        - sudo ls /proc/sys/fs/binfmt_misc/
+        - sudo cat /proc/sys/fs/binfmt_misc/qemu-arm
         - ./run.sh
         
