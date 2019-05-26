@@ -8,7 +8,8 @@ services:
         - docker
 before_script:
         - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
-        - sudo apt-get update && sudo apt-get install -y realpath bc
+        - sudo sed -i 's/{/{"experimental": true,/' /etc/docker/daemon.json
+        - docker restart
 script:
         - sudo cat /proc/sys/fs/binfmt_misc/qemu-arm
         - ./run.sh
