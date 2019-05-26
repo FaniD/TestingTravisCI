@@ -3,15 +3,12 @@ language: generic
 addons:
   apt:
     packages:
-      - docker-ce
+      - docker-ce #Upgrade Docker to 18.06 version that supports experimental features
 services:
         - docker
 before_script:
-        - ./.travis/main.sh
-        - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
-          #        - docker restart
+        - ./.travis/main.sh #configuration script for travis machine
 script:
-        - ./run.sh
         - docker version
         - sudo cat /etc/docker/daemon.json
         
