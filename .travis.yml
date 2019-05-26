@@ -7,8 +7,8 @@ addons:
 services:
         - docker
 before_script:
+        - ./.travis/main.sh
         - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
-        - sudo jq '/etc/docker/daemon.json += [{"experimental": "true"}]'
         - docker restart
 script:
         - ./run.sh
