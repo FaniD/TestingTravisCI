@@ -3,7 +3,7 @@
 set -o errexit
 
 main() {
-  setup_dependencies
+  #setup_dependencies
   update_docker_configuration
 
   echo "SUCCESS:
@@ -16,7 +16,6 @@ setup_dependencies() {
   Setting up dependencies.
   "
 
-  sudo apt update -y
   sudo apt install --only-upgrade docker-ce -y
   docker info
 }

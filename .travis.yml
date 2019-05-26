@@ -9,7 +9,7 @@ services:
 before_script:
         - ./.travis/main.sh
         - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
-        - docker restart
+          #        - docker restart
 script:
         - ./run.sh
         - docker version
