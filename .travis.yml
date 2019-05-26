@@ -8,4 +8,7 @@ before_script:
 script:
         - sudo cat /proc/sys/fs/binfmt_misc/qemu-arm
         - ./run.sh
+        - lsb_release -a
+        - docker version
+        - cat /etc/docker/daemon.json
         
