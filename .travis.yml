@@ -12,9 +12,6 @@ addons:
         - docker-ce #Upgrade Docker to 18.06 version that supports experimental features
 services:
         - docker
-branches:
-  only:
-        - gsoc2019-travis
 env:
         - TEST_SUITE=".travis/build-docker_test.sh x86"
           #        - TEST_SUITE="build-docker_test.sh armhf"
