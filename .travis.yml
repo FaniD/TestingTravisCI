@@ -20,6 +20,6 @@ before_script:
 jobs:
    include:
         - stage: build_debian-ncp
-          script: while sleep 9m; do echo "=====[ $SECONDS seconds, build-docker still building... ]====="; done & ./.travis/build-docker_test.sh x86
+          script: ./.travis/build-docker_test.sh x86
         -
           script: ./testit2.sh
