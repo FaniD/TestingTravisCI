@@ -26,5 +26,5 @@ jobs:
         - &build_debian-ncp
           stage: build_debian-ncp
           script: 
-                - ls | grep Hello
+                - ls .
                 - while sleep 9m; do echo "=====[ $SECONDS seconds, build-docker still building... ]====="; done & ./${TEST_SUITE} > output
