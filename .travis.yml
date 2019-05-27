@@ -12,15 +12,19 @@ addons:
         - docker-ce #Upgrade Docker to 18.06 version that supports experimental features
 services:
         - docker
+env:
+        - TEST_SUITE=".travis/build-docker_test.sh x86"
+        - TEST_SUITE="ls"
 jobs:
    include:
-        
         - stage: configuration
           env: null
-          script: ./.travis/main.sh #configuration script for travis machine
+          script: 
+                - ./.travis/main.sh #configuration script for travis machine
+                - touch Hello
 
-        - stage: build_debian-ncp
-          env: 
-                TEST_SUITE=".travis/build-docker_test.sh x86"
-                TEST_SUITE="ls"
-          script: while sleep 9m; do echo "=====[ $SECONDS seconds, build-docker still building... ]====="; done & ./${TEST_SUITE} > output
+        - &build_debian-ncp
+          stage: build_debian-ncp
+          script: 
+                - ls | grep Hello
+                - while sleep 9m; do echo "=====[ $SECONDS seconds, build-docker still building... ]====="; done & ./${TEST_SUITE} > output
