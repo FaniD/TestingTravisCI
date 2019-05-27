@@ -15,16 +15,16 @@ services:
 env:
         - TEST_SUITE="touch new"
         - TEST_SUITE="ls ."
+before_script:
+        - ./.travis/main.sh #configuration script for travis machine
 jobs:
    include:
         - stage: configuration
           env: null
           script: 
-                - ./.travis/main.sh #configuration script for travis machine
                 - touch Hello
 
         - stage: build_debian-ncp
+          before_script: true
           script: 
-                - ls
-                - ${TEST_SUITE}
-                - ls
+                - printenv | grep DOCKER
