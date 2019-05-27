@@ -25,4 +25,6 @@ jobs:
 
         - stage: build_debian-ncp
           script: 
+                - ls
                 - ${TEST_SUITE}
+                - ls
