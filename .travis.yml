@@ -30,7 +30,6 @@ jobs:
 
         - &build_debian-ncp
           stage: build_debian-ncp
-          before_script: true
           script: 
                 - printenv | grep DOCKER
                 - docker images
