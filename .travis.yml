@@ -13,8 +13,8 @@ addons:
 services:
         - docker
 env:
-        - TEST_SUITE=".travis/build-docker_test.sh x86"
-        - TEST_SUITE="ls"
+        - TEST_SUITE="touch new"
+        - TEST_SUITE="ls ."
 jobs:
    include:
         - stage: configuration
@@ -26,5 +26,4 @@ jobs:
         - &build_debian-ncp
           stage: build_debian-ncp
           script: 
-                - ls .
-                - while sleep 9m; do echo "=====[ $SECONDS seconds, build-docker still building... ]====="; done & ./${TEST_SUITE} > output
+                - ${TEST_SUITE}
