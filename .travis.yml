@@ -15,14 +15,10 @@ services:
 cache:
     directories:
         - /var/lib/docker
+before_script:
+        - ./.travis/main.sh
 jobs:
    include:
-        - stage: configuration
-          env: null
-          script:
-                - ./.travis/main.sh 
-                - docker pull hello-world
-
         - stage: build_debian-ncp
           script: while sleep 9m; do echo "=====[ $SECONDS seconds, build-docker still building... ]====="; done & ./.travis/build-docker_test.sh x86
         -
