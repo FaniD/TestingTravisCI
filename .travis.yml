@@ -16,8 +16,8 @@ cache:
     directories:
         - /var/lib/docker
 env:
-        - TEST_SUITE="touch new"
-        - TEST_SUITE="ls ."
+        - TEST_SUITE="testit.sh"
+        - TEST_SUITE="testit2.sh"
 before_script:
         - ./.travis/main.sh #configuration script for travis machine
 jobs:
@@ -31,5 +31,4 @@ jobs:
         - &build_debian-ncp
           stage: build_debian-ncp
           script: 
-                - printenv | grep DOCKER
-                - docker images
+                - ./${TEST_SUITE}
