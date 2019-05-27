@@ -12,6 +12,9 @@ addons:
         - docker-ce #Upgrade Docker to 18.06 version that supports experimental features
 services:
         - docker
+cache:
+    directories:
+        - /var/lib/docker
 env:
         - TEST_SUITE="touch new"
         - TEST_SUITE="ls ."
@@ -23,8 +26,11 @@ jobs:
           env: null
           script: 
                 - touch Hello
+                - docker pull hello-world
 
-        - stage: build_debian-ncp
+        - &build_debian-ncp
+          stage: build_debian-ncp
           before_script: true
           script: 
                 - printenv | grep DOCKER
+                - docker images
