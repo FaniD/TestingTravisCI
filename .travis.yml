@@ -23,7 +23,6 @@ jobs:
                 - ./.travis/main.sh #configuration script for travis machine
                 - touch Hello
 
-        - &build_debian-ncp
-          stage: build_debian-ncp
+        - stage: build_debian-ncp
           script: 
                 - ${TEST_SUITE}
