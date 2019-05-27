@@ -28,9 +28,7 @@ jobs:
                 - touch Hello
                 - docker pull hello-world
 
-        - &build_debian-ncp
-          stage: build_debian-ncp
-          script: 
-                - ./testit.sh
-                -
-                - ./testit2.sh
+        - stage: build_debian-ncp
+          script: ./testit.sh
+        -
+          script: ./testit2.sh
