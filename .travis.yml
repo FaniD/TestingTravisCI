@@ -20,6 +20,6 @@ before_script:
 jobs:
    include:
         - stage: build_debian-ncp
-          script: ./.travis/build-docker_test.sh x86
+          script: DOCKER_BUILDKIT=1 docker build . -f docker/debian-ncp/Dockerfile -t ownyourbits/debian-ncp-amd64:latest --pull --build-arg arch=amd64 --build-arg arch_qemu=x86_64
         -
-          script: ./testit2.sh
+          script: ./testit.sh
