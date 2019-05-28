@@ -24,7 +24,8 @@ jobs:
                     #               - sudo ls /var/lib/docker/tmp
                     #                  - sudo ls /var/lib/docker/buildkit/cache.db
                     # ./.travis/build-docker_test.sh x86
-                  - DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-amd64:latest --build-arg arch=amd64
+                  - docker version
+                  - DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-amd64:latest --build-arg arch=amd64 > output
         - stage: build_2
           script:
                   - printenv | grep DOCKER
