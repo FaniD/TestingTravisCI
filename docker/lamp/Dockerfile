@@ -12,7 +12,10 @@ ENV DOCKERBUILD 1
 
 COPY etc/library.sh lamp.sh /usr/local/etc/
 
-RUN source /usr/local/etc/library.sh; \
+RUN --mount=type=cache,target=/var/cache/apt --mount=type=cache,target=/var/lib/apt \
+
+# installation
+source /usr/local/etc/library.sh; \
 set +x; \
 install_app /usr/local/etc/lamp.sh; \
 
