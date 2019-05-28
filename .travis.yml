@@ -23,6 +23,7 @@ jobs:
                   - printenv | grep DOCKER
                   - sudo ls /var/lib/docker/buildkit
                   - sudo ls /var/lib/docker/tmp
+                  - sudo ls /var/lib/docker/cache.db
                     #- DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-amd64:latest --build-arg arch=amd64
         - stage: build_2
           script:
