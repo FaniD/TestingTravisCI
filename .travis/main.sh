@@ -19,14 +19,13 @@ update_docker_configuration() {
   echo "INFO:
   Updating docker configuration
   "
-
-  echo '{
-  "experimental": true,
-  "max-concurrent-downloads": 50,
-  "max-concurrent-uploads": 50
-}' | sudo tee /etc/docker/daemon.json
+  echo $'{\n    "experimental": true\n}' | sudo tee /etc/docker/daemon.json;
+#  echo '{
+#  "experimental": true,
+#  "max-concurrent-downloads": 50,
+#  "max-concurrent-uploads": 50
+#}' | sudo tee /etc/docker/daemon.json
   sudo service docker restart
-  export DOCKER_CLI_EXPERIMENTAL=enabled
 }
 
 add_packages_for_arm_architecture() {
