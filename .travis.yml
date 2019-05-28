@@ -12,6 +12,7 @@ services:
 cache: ccache
 before_script:
         - ./.travis/main.sh
+        - export DOCKER_CLI_EXPERIMENTAL=enabled
 jobs:
    include:
         - stage: build_1
