@@ -9,9 +9,6 @@ addons:
         - docker-ce #Upgrade Docker to 18.06 version that supports experimental features
 services:
         - docker
-cache:
-    directories:
-        - /var/lib/docker
 before_script:
         - ./.travis/main.sh
 jobs:
