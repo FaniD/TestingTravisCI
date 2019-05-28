@@ -18,12 +18,13 @@ jobs:
         - stage: build_1
           script:
                   - printenv | grep DOCKER
-                  - DOCKER_BUILDKIT=1 docker build . -f docker/debian-ncp/Dockerfile -t ownyourbits/debian-ncp-amd64:latest --pull --build-arg arch=amd64 --build-arg arch_qemu=x86_64 > output
-                  - docker images
-                  - printenv | grep DOCKER
-                  - sudo ls /var/lib/docker/buildkit
-                  - sudo ls /var/lib/docker/tmp
-                  - sudo ls /var/lib/docker/buildkit/cache.db
+                    #                  - DOCKER_BUILDKIT=1 docker build . -f docker/debian-ncp/Dockerfile -t ownyourbits/debian-ncp-amd64:latest --pull --build-arg arch=amd64 --build-arg arch_qemu=x86_64 > output
+                    #                  - docker images
+                    #                 - printenv | grep DOCKER
+                    #                  - sudo ls /var/lib/docker/buildkit
+                    #               - sudo ls /var/lib/docker/tmp
+                    #                  - sudo ls /var/lib/docker/buildkit/cache.db
+                  - ./.travis/build-docker_test.sh x86
                     #- DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-amd64:latest --build-arg arch=amd64
         - stage: build_2
           script:
