@@ -18,6 +18,7 @@ jobs:
           script:
                   - DOCKER_BUILDKIT=1 docker build . -f docker/debian-ncp/Dockerfile -t ownyourbits/debian-ncp-amd64:latest --pull --build-arg arch=amd64 --build-arg arch_qemu=x86_64
                   - docker images
+                  - export DOCKER_CLI_EXPERIMENTAL=enabled
                   - printenv | grep DOCKER
                   - DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-amd64:latest --pull --build-arg arch=amd64
         - stage: build_2
