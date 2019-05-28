@@ -19,5 +19,5 @@ jobs:
                   - docker images
         - stage: build_2
           script:
-                  - DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-amd64:latest --pull --build-arg arch=amd64
+                  - DOCKER_BUILDKIT=1 docker build . -f docker/debian-ncp/Dockerfile -t ownyourbits/debian-ncp-armhf:latest --build-arg arch=armhf --build-arg arch_qemu=arm
                   - docker images
