@@ -1,9 +1,6 @@
 stages:
-        - configuration
-        - build_debian-ncp
-        - build_lamp
-        - build_nc
-        - build_ncp
+        - build_1
+        - build_2
 sudo: required
 language: generic
 addons:
@@ -19,7 +16,7 @@ before_script:
         - ./.travis/main.sh
 jobs:
    include:
-        - stage: build_debian-ncp
+        - stage: build_1
           script: DOCKER_BUILDKIT=1 docker build . -f docker/debian-ncp/Dockerfile -t ownyourbits/debian-ncp-amd64:latest --pull --build-arg arch=amd64 --build-arg arch_qemu=x86_64
-        -
-          script: ./testit.sh
+        - stage: build_2
+          script: docker images
