@@ -28,4 +28,4 @@ jobs:
                   - docker images
 
 notifications:
-        emails: false
+        email: false
