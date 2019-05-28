@@ -3,12 +3,12 @@ stages:
         - build_2
 sudo: required
 language: generic
-addons:
-  apt:
-    packages:
-        - docker-ce #Upgrade Docker to 18.06 version that supports experimental features
-services:
-        - docker
+#addons:
+#  apt:
+#    packages:
+#        - docker-ce #Upgrade Docker to 18.06 version that supports experimental features
+#services:
+#        - docker
 before_script:
         - ./.travis/main.sh
         - export DOCKER_CLI_EXPERIMENTAL=enabled
