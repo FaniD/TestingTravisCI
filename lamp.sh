@@ -138,7 +138,7 @@ transaction_isolation = READ-COMMITTED
 innodb_large_prefix=true
 innodb_file_per_table=1
 innodb_file_format=barracuda
-open_files_limit=65536
+
 [server]
 # innodb settings
 skip-name-resolve
