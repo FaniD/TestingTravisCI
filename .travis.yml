@@ -28,8 +28,6 @@ jobs:
                     #                  - sudo ls /var/lib/docker/buildkit/cache.db
                     # ./.travis/build-docker_test.sh x86
                   - docker save ownyourbits/debian-ncp-amd64:latest | gzip -c > docker/debian-ncp.tar.gz
-                  - sudo cat /etc/docker/daemon.json
-                  - DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-amd64:latest --build-arg arch=amd64 > output
         - stage: build_2
           script:
                   - gzip -dc docker/debian-ncp.tar.gz | docker load
