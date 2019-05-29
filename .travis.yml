@@ -32,6 +32,7 @@ jobs:
                   - DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-amd64:latest --build-arg arch=amd64 > output
         - stage: build_2
           script:
+                  - gzip -dc docker/debian-ncp.tar.gz | docker load
                   - printenv | grep DOCKER
                   - docker images
 
