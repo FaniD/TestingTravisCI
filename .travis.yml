@@ -32,7 +32,7 @@ jobs:
           script:
                   - gzip -dc docker/debian-ncp.tar.gz | docker load
                   - sed -i '/[mysqld]/a\\65536' lamp.sh
-                  - while sleep 9m; do echo "=====[ $SECONDS seconds, build-docker still building... ]====="; done & DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-amd64:latest --build-arg arch=amd64
+                  - while sleep 9m; do echo "=====[ $SECONDS seconds, build-docker still building... ]====="; done & DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-amd64:latest --build-arg arch=amd64 > output
                   - docker images
                   - sed -i '/open_files_limit=65536/d' lamp.sh
 
