@@ -3,20 +3,9 @@ stages:
         - build_2
 sudo: required
 language: generic
-#addons:
-#  apt:
-#    packages:
-#        - docker-ce #Upgrade Docker to 18.06 version that supports experimental features
-#services:
-#        - docker
 before_script:
         - ./.travis/main.sh
-        - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-        - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-        - sudo apt-get update
-        - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
         - export DOCKER_CLI_EXPERIMENTAL=enabled
-        - docker version
 cache:
    directories:
         - docker
@@ -24,23 +13,18 @@ jobs:
    include:
         - stage: build_1
           script:
+                  - docker version
                   - printenv | grep DOCKER
-                  - while sleep 9m; do echo "=====[ $SECONDS seconds, build-docker still building... ]====="; done & 
-                  - DOCKER_BUILDKIT=1 docker build . -f docker/debian-ncp/Dockerfile -t ownyourbits/debian-ncp-armhf:latest --pull --build-arg arch=armhf --build-arg arch_qemu=arm > output & tail -f output
-                    #                  - docker images
-                    #                 - printenv | grep DOCKER
-                    #                  - sudo ls /var/lib/docker/buildkit
-                    #               - sudo ls /var/lib/docker/tmp
-                    #                  - sudo ls /var/lib/docker/buildkit/cache.db
-                    # ./.travis/build-docker_test.sh x86
-                    #                  - docker save ownyourbits/debian-ncp-amd64:latest | gzip -c > docker/debian-ncp.tar.gz
-                    #        - stage: build_2
-                    #          script:
-                    #                  - gzip -dc docker/debian-ncp.tar.gz | docker load
-                    #                  - sed -i "/innodb_file_format=barracuda/a open_files_limit=65536" lamp.sh
-                    #                  - while sleep 9m; do echo "=====[ $SECONDS seconds, build-docker still building... ]====="; done & DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-amd64:latest --build-arg arch=amd64 > output
+                  - DOCKER_BUILDKIT=1 docker build . -f docker/debian-ncp/Dockerfile -t ownyourbits/debian-ncp-amd64:latest --pull --build-arg arch=amd64 --build-arg arch_qemu=x86_64 > output
+                  - docker save ownyourbits/debian-ncp-amd64:latest | gzip -c > docker/debian-ncp.tar.gz
+        - stage: build_2
+          script:
+                  - gzip -dc docker/debian-ncp.tar.gz | docker load
+                  - sed -i "/innodb_file_format=barracuda/a open_files_limit=65536" lamp.sh
+                  - while sleep 9m; do echo "=====[ $SECONDS seconds, build-docker still building... ]====="; done & DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-amd64:latest --build-arg arch=amd64 > output
                   - docker images
-                    #                  - sed -i '/open_files_limit=65536/d' lamp.sh
+                  - sed -i '/open_files_limit=65536/d' lamp.sh
 
 notifications:
         email: false
+

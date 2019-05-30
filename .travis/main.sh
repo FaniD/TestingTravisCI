@@ -15,8 +15,8 @@ update_docker_configuration() {
   echo "INFO:
   Updating docker configuration
   "
-#  curl -fsSL https://get.docker.com -o get-docker.sh
-#  sudo sh get-docker.sh
+  curl -fsSL https://get.docker.com -o get-docker.sh
+  sudo sh get-docker.sh
   echo $'{\n    "experimental": true\n}' | sudo tee /etc/docker/daemon.json
   sudo service docker restart
 }
