@@ -11,13 +11,10 @@ before_script:
 jobs:
   include:
         - stage: building_images
-          script:
-            - DOCKER_BUILDKIT=1 docker build . -f docker/debian-ncp/Dockerfile -t ownyourbits/debian-ncp-amd64:latest --pull --build-arg arch=amd64 --build-arg arch_qemu=x86_64 > output & tail -f output
-        -
-          script: DOCKER_BUILDKIT=1 docker build . -f docker/debian-ncp/Dockerfile -t ownyourbits/debian-ncp-armhf:latest --pull --build-arg arch=armhf --build-arg arch_qemu=arm > output & tail -f output
+          script: ./build-SD-rpi.sh
 
         - stage: deploy
-          script: ls       
+          script: ls        
 notifications:
         email: false
 
