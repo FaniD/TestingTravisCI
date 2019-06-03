@@ -4,18 +4,12 @@ stages:
 sudo: required
 language: generic
 dist: xenial
-before_script:
-        - ./.travis/main.sh #configuration script for travis machine - upgrading docker and installing packages for arm architecture
-        - export DOCKER_CLI_EXPERIMENTAL=enabled #enable experimental features
-        - docker version #Check Docker 18.09 is installed
 jobs:
   include:
         - stage: building_images
           script:
            - IP=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
-             #- cat IP
-           - echo "${IP}"
-           - lscpu
+           - ./.travis/configure_webtesting.sh
         - stage: deploy
           script: ls
 
