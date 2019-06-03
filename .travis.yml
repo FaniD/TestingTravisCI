@@ -4,6 +4,8 @@ stages:
 sudo: required
 language: generic
 dist: xenial
+addons:
+        firefox: latest
 jobs:
   include:
         - stage: building_images
