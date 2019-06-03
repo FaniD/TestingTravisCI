@@ -12,8 +12,8 @@ jobs:
   include:
         - stage: building_images
           script:
-           - ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}' > IP
-           - cat IP
+           - IP=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
+             #- cat IP
            - echo "${IP}"
 
         - stage: deploy
