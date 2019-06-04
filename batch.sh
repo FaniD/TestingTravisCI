@@ -36,7 +36,7 @@ source buildlib.sh          # initializes $IMGNAME
 #./build-VM.sh
 
 # Docker
-./build-docker.sh x86
+#./build-docker.sh x86
 ./build-docker.sh armhf
 ./build-docker.sh arm64
 
