@@ -11,11 +11,10 @@ jobs:
            - IP=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
         - stage: deploy
           before_script: echo "hello world"
-
-        -
-          script: ls
-        - 
-          script: ls
+          env:
+            - TEST="amd"
+            - TEST="arm"
+          script: echo "${TEST}"
 
 notifications:
         email: false
