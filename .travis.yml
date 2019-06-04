@@ -17,6 +17,6 @@ jobs:
           - docker run hello-world 
           - docker images
           - docker tag hello-world $DOCKER_USERNAME/hello-world
-          - docker push hello-world:latest
+          - docker push $DOCKER_USERNAME/hello-world:latest
 notifications:
         email: false
