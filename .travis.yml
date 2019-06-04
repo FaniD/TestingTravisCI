@@ -10,11 +10,9 @@ jobs:
           script:
            - IP=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
         - stage: deploy
-          before_script: echo "hello world"
-          env:
-            - TEST="amd"
-            - TEST="arm"
-          script: echo "${TEST}"
-
+          before_script:
+          - echo "hello world"
+          - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          script: ls .
 notifications:
         email: false
