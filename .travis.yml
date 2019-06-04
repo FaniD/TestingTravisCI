@@ -9,7 +9,7 @@ jobs:
         - stage: building_images
           script:
           - ./.travis/configure_docker.sh
-          - ./docker-build.sh x86
+          - ./build-docker.sh x86
           - docker images
 notifications:
         email: false
