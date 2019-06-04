@@ -13,6 +13,9 @@ jobs:
           before_script:
           - echo "hello world"
           - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          script: ls .
+          script:
+          - docker run hello-world 
+          - docker images
+          - docker push ${DOCKER_USERNAME}/hello-world:latest
 notifications:
         email: false
