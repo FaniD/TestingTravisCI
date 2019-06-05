@@ -9,6 +9,7 @@ jobs:
         - stage: building_images
           script:
           - ./.travis/configure_docker.sh
+          - export DOCKER_CLI_EXPERIMENTAL=enabled #enable experimental features
           - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           - docker manifest create $DOCKER_USERNAME/nextcloudpi
           - docker images
