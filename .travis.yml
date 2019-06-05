@@ -9,7 +9,8 @@ jobs:
         - stage: building_images
           script:
           - ./.travis/configure_docker.sh
-          - ./build-docker.sh x86
+          - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          - docker manifest create $DOCKER_USERNAME/nextcloudpi
           - docker images
 notifications:
         email: false
