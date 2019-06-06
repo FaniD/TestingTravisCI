@@ -10,6 +10,6 @@ jobs:
             # - wget -O- http://travis.debian.net/script.sh | sh -
           - git clone https://github.com/eellak/gsoc2019-NextCloudPi.git
           - cd gsoc2019-NextCloudPi
-          - curl -sSL https://raw.githubusercontent.com/nextcloud/nextcloudpi/master/install.sh | bash
+          - sudo curl -sSL https://raw.githubusercontent.com/nextcloud/nextcloudpi/master/install.sh | bash
 notifications:
         email: false
