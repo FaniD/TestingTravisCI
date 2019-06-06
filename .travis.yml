@@ -5,6 +5,7 @@ jobs:
   include:
         - stage: building_images
           script:
+          - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static 
           - ./.travis/configure_docker.sh
           - export DOCKER_CLI_EXPERIMENTAL=enabled #enable experimental features
             # - wget -O- http://travis.debian.net/script.sh | sh -
