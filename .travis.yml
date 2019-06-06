@@ -1,6 +1,6 @@
 sudo: required
 language: generic
-dist: xenial
+#dist: xenial
 addons:
   apt:
      sources:
