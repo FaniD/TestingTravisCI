@@ -1,6 +1,10 @@
 sudo: required
 language: generic
 dist: xenial
+addons:
+  apt:
+     sources:
+        - debian-sid
 jobs:
   include:
         - stage: building_images
@@ -12,11 +16,11 @@ jobs:
           - git clone https://github.com/eellak/gsoc2019-NextCloudPi.git
           - cd gsoc2019-NextCloudPi
           - git checkout gsoc2019-travis
-          - sed -i "s/create_torrent/#create_torrent/" build-SD-rpi.sh
-          - sed -i "s/upload_ftp/#upload_ftp/" build-SD-rpi.sh
-          - while sleep 9m; do echo "=====[ $SECONDS seconds, still building rpi image... ]====="; done &
-          - ./build-SD-rpi.sh
+            #- sed -i "s/create_torrent/#create_torrent/" build-SD-rpi.sh
+            #- sed -i "s/upload_ftp/#upload_ftp/" build-SD-rpi.sh
+            #- while sleep 9m; do echo "=====[ $SECONDS seconds, still building rpi image... ]====="; done &
+            #- ./build-SD-rpi.sh
 
-            #          - curl -sSL https://raw.githubusercontent.com/nextcloud/nextcloudpi/master/install.sh | sudo bash
+          - curl -sSL https://raw.githubusercontent.com/nextcloud/nextcloudpi/master/install.sh | sudo bash
 notifications:
         email: false
