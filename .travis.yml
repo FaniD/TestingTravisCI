@@ -1,6 +1,3 @@
-stages:
-        - building_images
-        - deploy
 sudo: required
 language: generic
 dist: xenial
@@ -10,8 +7,10 @@ jobs:
           script:
           - ./.travis/configure_docker.sh
           - export DOCKER_CLI_EXPERIMENTAL=enabled #enable experimental features
-          - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          - docker manifest create $DOCKER_USERNAME/nextcloudpi
-          - docker images
+          - wget -O- http://travis.debian.net/script.sh | sh -
+            #          - git clone https://github.com/eellak/gsoc2019-NextCloudPi.git
+            #          - cd gsoc2019-NextCloudPi
+            #          - 
+          - cat /etc/os-release
 notifications:
         email: false
