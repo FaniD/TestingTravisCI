@@ -9,8 +9,7 @@ jobs:
           - export DOCKER_CLI_EXPERIMENTAL=enabled #enable experimental features
             # - wget -O- http://travis.debian.net/script.sh | sh -
           - git clone https://github.com/eellak/gsoc2019-NextCloudPi.git
-            #          - cd gsoc2019-NextCloudPi
-            #          - 
-          - cat /etc/os-release
+          - cd gsoc2019-NextCloudPi
+          - curl -sSL https://raw.githubusercontent.com/nextcloud/nextcloudpi/master/install.sh | bash
 notifications:
         email: false
