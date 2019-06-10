@@ -5,6 +5,9 @@ stages:
 sudo: required
 language: generic
 dist: xenial
+branches:
+  only:
+        - gsoc2019-travis
 cache:
   directories:
         - docker_cached
@@ -28,9 +31,22 @@ jobs:
           - docker save --output docker_cached/lamp-amd64.tar ownyourbits/lamp-amd64:latest
 
         - stage: testing
-          before_script:
+
+          ### x86 Docker images
+          install:
+          - ./.travis/configure_docker.sh
+          - export DOCKER_CLI_EXPERIMENTAL=enabled #enable experimental features      
+          - export MOZ_HEADLESS=1
+          - sudo apt-get install python3-pip
+          - sudo python3 -m pip install selenium
+          - wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
+          - tar -xvzf geckodriver*
+          - chmod +x geckodriver
+          - export PATH=$PATH:$PWD
+            
+          script:
           - docker load --input docker_cached/lamp-amd64.tar
-          - docker images
+          - IP=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
 
 notifications:
   email: false
