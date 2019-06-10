@@ -25,7 +25,6 @@ jobs:
           - DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-amd64:latest --build-arg arch=amd64 > file_output
           - sed -i '/open_files_limit=65536/d' lamp.sh
           - DOCKER_BUILDKIT=1 docker build . -f docker/nextcloud/Dockerfile -t ownyourbits/nextcloud-amd64:latest --build-arg arch=amd64 > file_output
-          - DOCKER_BUILDKIT=1 docker build . -f docker/nextcloudpi/Dockerfile -t ownyourbits/nextcloudpi-amd64:latest --build-arg arch=amd64 > file_output
           - docker save --output docker_cached/debian-ncp-amd64.tar ownyourbits/debian-ncp-amd64:latest
           - docker save --output docker_cached/lamp-amd64.tar ownyourbits/lamp-amd64:latest
 
