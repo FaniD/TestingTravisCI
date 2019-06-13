@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
   #Public IP
   #config.vm.network "public_network"
   #config.vm.network "public_network", ip: "192.168.0.17"
-  config.vm.network "public_network", bridge: "wlp4s0"
+  config.vm.network "public_network", bridge: "ens4"
 
   #Private IP
   #config.vm.network "private_network", ip: "192.168.50.4"
