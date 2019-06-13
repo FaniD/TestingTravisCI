@@ -4,7 +4,7 @@ sudo: required
 language: generic
 dist: xenial
 # Only build tags
-if: tag IS present
+#if: tag IS present
 jobs:
   include:
         - stage: building
@@ -13,14 +13,10 @@ jobs:
           - ./.travis/configure_docker.sh
           - sudo apt-get install vagrant
           - sudo apt-get install -q virtualbox --fix-missing
-          - docker pull skandyla/travis-cli
-          - docker tag skandyla/travis-cli travis-cli
-          - travis login
-          - ./.travis/travis-cli.sh status
 
           script:
           - vagrant up
-          - curl -sSL https://raw.githubusercontent.com/nextcloud/nextcloudpi/master/install.sh | bash
+          - curl -sSL https://raw.githubusercontent.com/nextcloud/nextcloudpi/master/install.sh | sudo bash
 
 notifications:
   email: false
