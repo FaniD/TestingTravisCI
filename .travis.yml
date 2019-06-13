@@ -3,6 +3,7 @@ stages:
 sudo: required
 language: generic
 dist: xenial
+on tags: true
 jobs:
   include:
         - stage: building
@@ -13,6 +14,7 @@ jobs:
           - sudo apt-get install -q virtualbox --fix-missing
           - docker pull skandyla/travis-cli
           - docker tag skandyla/travis-cli travis-cli
+          - travis login
           - ./.travis/travis-cli.sh status
 
           script:
