@@ -3,21 +3,21 @@ stages:
 sudo: required
 language: generic
 dist: xenial
-# Only build tags
-#if: tag IS present
 jobs:
   include:
         - stage: building
 
           install:
-          - sudo apt-get update
-          - sudo apt-get -y install linux-headers-$(uname -r)
-          - sudo apt-get -y install virtualbox
-          - sudo apt-get -y install vagrant
-
+          - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
+          - git clone https://github.com/eellak/gsoc2019-NextCloudPi.git
+          - cd gsoc2019-NextCloudPi
+          - git checkout gsoc2019-travis
+         
           script:
-          - vagrant up
-          - VBoxManage --version
+          - sed -i "s/create_torrent/#create_torrent/" build-SD-rpi.sh
+          - sed -i "s/upload_ftp/#upload_ftp/" build-SD-rpi.sh
+          - while sleep 9m; do echo "=====[ $SECONDS seconds, still building rpi image... ]====="; done &
+          - ./build-SD-rpi.sh
 
 notifications:
   email: false
