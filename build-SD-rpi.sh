@@ -23,10 +23,10 @@ pgrep -f qemu-arm-static &>/dev/null && { echo "qemu-arm-static already running.
 
 IMG=tmp/"$IMG"
 
-prepare_dirs                   # tmp cache output
-download_raspbian "$IMG"
-resize_image      "$IMG" "$SIZE"
-update_boot_uuid  "$IMG"       # PARTUUID has changed after resize
+prepare_dirs > a                  # tmp cache output
+download_raspbian "$IMG" > a
+resize_image      "$IMG" "$SIZE" > a
+update_boot_uuid  "$IMG" > a      # PARTUUID has changed after resize
 
 # make sure we don't accidentally disable first run wizard
 rm -f ncp-web/{wizard.cfg,ncp-web.cfg}
@@ -34,20 +34,20 @@ rm -f ncp-web/{wizard.cfg,ncp-web.cfg}
 ## BUILD NCP
 
 echo -e "\e[1m\n[ Build NCP ]\e[0m"
-prepare_chroot_raspbian "$IMG"
+prepare_chroot_raspbian "$IMG" > a
 
 mkdir raspbian_root/tmp/ncp-build
-rsync -Aax --exclude-from .gitignore --exclude *.img --exclude *.bz2 . raspbian_root/tmp/ncp-build
+rsync -Aax --exclude-from .gitignore --exclude *.img --exclude *.bz2 . raspbian_root/tmp/ncp-build > a
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
   sudo chroot raspbian_root /bin/bash <<'EOFCHROOT'
     set -e
 
     # mark the image as an image build
-    touch /.ncp-image
+    touch /.ncp-image 
 
     # update packages
-    apt-get update
+    apt-get update > a
 
     # As of 10-2018 this upgrades raspi-kernel and messes up wifi and BTRFS
     #apt-get upgrade -y
@@ -63,12 +63,12 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     source etc/library.sh
     mkdir -p /usr/local/etc/ncp-config.d
     cp etc/ncp-config.d/nc-nextcloud.cfg /usr/local/etc/ncp-config.d/
-    install_app    lamp.sh
-    install_app    bin/ncp/CONFIG/nc-nextcloud.sh
-    run_app_unsafe bin/ncp/CONFIG/nc-nextcloud.sh
-    install_app    ncp.sh
-    run_app_unsafe bin/ncp/CONFIG/nc-init.sh
-    run_app_unsafe post-inst.sh
+    install_app    lamp.sh > a
+    install_app    bin/ncp/CONFIG/nc-nextcloud.sh > a
+    run_app_unsafe bin/ncp/CONFIG/nc-nextcloud.sh > a
+    install_app    ncp.sh > a
+    run_app_unsafe bin/ncp/CONFIG/nc-init.sh > a
+    run_app_unsafe post-inst.sh > a
 
     # harden SSH further for Raspbian
     sed -i 's|^#PermitRootLogin .*|PermitRootLogin no|' /etc/ssh/sshd_config
