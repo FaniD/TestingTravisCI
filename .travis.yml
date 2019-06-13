@@ -3,7 +3,8 @@ stages:
 sudo: required
 language: generic
 dist: xenial
-on tags: true
+# Only build tags
+if: tag IS present
 jobs:
   include:
         - stage: building
