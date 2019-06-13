@@ -17,7 +17,7 @@ jobs:
           - sed -i "s/create_torrent/#create_torrent/" build-SD-rpi.sh
           - sed -i "s/upload_ftp/#upload_ftp/" build-SD-rpi.sh
           - while sleep 9m; do echo "=====[ $SECONDS seconds, still building rpi image... ]====="; done &
-          - ./build-SD-rpi.sh
+          - ./build-SD-rpi.sh > f_output
 
 notifications:
   email: false
