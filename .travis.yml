@@ -9,10 +9,10 @@ jobs:
 
           install:
           - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
-          - export LANGUAGE = "en_US.UTF-8",
-	  - export LC_ALL = "en_US.UTF-8",
-	  - export LC_CTYPE = "en_US.UTF-8",
-	  - export LANG = "en_US.UTF-8"
+          - export LANGUAGE="en_US.UTF-8",
+	  - export LC_ALL="en_US.UTF-8",
+	  - export LC_CTYPE="en_US.UTF-8",
+	  - export LANG="en_US.UTF-8"
           script:
           - git clone https://github.com/eellak/gsoc2019-NextCloudPi.git
           - git checkout gsoc2019-travis
