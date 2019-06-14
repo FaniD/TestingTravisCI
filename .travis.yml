@@ -8,7 +8,7 @@ jobs:
         - stage: building
 
           install:
-                  #- sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
+          - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
           - locale
           - export LANGUAGE="en_US.UTF-8"
           - export LANG="en_US.UTF-8"
