@@ -25,7 +25,7 @@ jobs:
 
           - locale
 
-          - cat /etc/local.gen
+          - cat /etc/locale.gen
             #          - sudo sed -i "" /etc/local.gen
           script:
           - git clone https://github.com/eellak/gsoc2019-NextCloudPi.git
