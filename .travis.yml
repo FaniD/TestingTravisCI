@@ -31,7 +31,7 @@ jobs:
             #          - sed -i "87s, ,echo PREPACKING," build-SD-rpi.sh
           - while sleep 9m; do echo "=====[ $SECONDS seconds, still building rpi image... ]====="; done &
           - tail -f f_out &
-          - ./build-SD-rpi.sh > f_out
+          - sudo ./build-SD-rpi.sh > f_out
           
 notifications:
   email: false
