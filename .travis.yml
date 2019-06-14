@@ -24,6 +24,9 @@ jobs:
           - sudo update-locale en_US.UTF-8
 
           - locale
+
+          - cat /etc/local.gen
+            #          - sudo sed -i "" /etc/local.gen
           script:
           - git clone https://github.com/eellak/gsoc2019-NextCloudPi.git
           - git checkout gsoc2019-travis
