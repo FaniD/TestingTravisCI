@@ -8,28 +8,30 @@ jobs:
         - stage: building
 
           install:
-          - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
+                  #- sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
+          - locale
           - export LANGUAGE=en_US.UTF-8
           - export LANG=en_US.UTF-8
           - export LC_ALL=en_US.UTF-8
           - export LC_CTYPE=en_US.UTF-8
           - sudo locale-gen en_US.UTF-8
           - sudo dpkg-reconfigure locales
+          - locale
           script:
-          - git clone https://github.com/eellak/gsoc2019-NextCloudPi.git
-          - git checkout gsoc2019-travis
-          - cd gsoc2019-NextCloudPi
-          - sed -i "s/create_torrent/#create_torrent/" build-SD-rpi.sh
-          - sed -i "s/upload_ftp/#upload_ftp/" build-SD-rpi.sh
-          - sed -i "/innodb_file_format=barracuda/a open_files_limit=65536" lamp.sh
+                  #- git clone https://github.com/eellak/gsoc2019-NextCloudPi.git
+                  #- git checkout gsoc2019-travis
+                  #          - cd gsoc2019-NextCloudPi
+                  #- sed -i "s/create_torrent/#create_torrent/" build-SD-rpi.sh
+                  #- sed -i "s/upload_ftp/#upload_ftp/" build-SD-rpi.sh
+                  #- sed -i "/innodb_file_format=barracuda/a open_files_limit=65536" lamp.sh
             #          - sed -i "12s,{,{ echo GETS-INSIDE-POSTINST," post-inst.sh
             #          - sed -i "18s, ,echo gets-up-to-here," post-inst.sh
             #          - sed -i "23s, ,echo gets-up-to-here," post-inst.sh
             #          - sed -i "29s, ,echo gets-up-to-here," post-inst.sh
             #          - sed -i "87s, ,echo PREPACKING," build-SD-rpi.sh
-          - while sleep 9m; do echo "=====[ $SECONDS seconds, still building rpi image... ]====="; done &
-          - tail -f f_out &
-          - ./build-SD-rpi.sh > f_out
-
+            #- while sleep 9m; do echo "=====[ $SECONDS seconds, still building rpi image... ]====="; done &
+            #- tail -f f_out &
+            #- ./build-SD-rpi.sh > f_out
+           - ls
 notifications:
   email: false
