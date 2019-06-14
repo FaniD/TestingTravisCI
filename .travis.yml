@@ -2,7 +2,17 @@ stages:
         - building
 sudo: required
 language: generic
-dist: xenial
+dist: trusty
+addons:
+  apt:
+    packages:
+    - qemu
+    - qemu-user-static
+    - binfmt-support
+    - parted
+    - wget
+    - dosfstools
+    - zip
 jobs:
   include:
         - stage: building
