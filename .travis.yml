@@ -16,11 +16,11 @@ jobs:
           - cd gsoc2019-NextCloudPi
           - sed -i "s/create_torrent/#create_torrent/" build-SD-rpi.sh
           - sed -i "s/upload_ftp/#upload_ftp/" build-SD-rpi.sh
-          - sed -i "12s,{,{ echo GETS-INSIDE-POSTINST," post-inst.sh
-          - sed -i "18s, ,echo gets-up-to-here," post-inst.sh
-          - sed -i "23s, ,echo gets-up-to-here," post-inst.sh
-          - sed -i "29s, ,echo gets-up-to-here," post-inst.sh
-          - sed -i "87s, ,echo PREPACKING," build-SD-rpi.sh
+            #          - sed -i "12s,{,{ echo GETS-INSIDE-POSTINST," post-inst.sh
+            #          - sed -i "18s, ,echo gets-up-to-here," post-inst.sh
+            #          - sed -i "23s, ,echo gets-up-to-here," post-inst.sh
+            #          - sed -i "29s, ,echo gets-up-to-here," post-inst.sh
+            #          - sed -i "87s, ,echo PREPACKING," build-SD-rpi.sh
           - while sleep 9m; do echo "=====[ $SECONDS seconds, still building rpi image... ]====="; done &
           - tail -f f_out &
           - ./build-SD-rpi.sh > f_out
