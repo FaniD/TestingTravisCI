@@ -38,7 +38,7 @@ jobs:
           - sed -i "/innodb_file_format=barracuda/a open_files_limit=65536" lamp.sh
           - while sleep 9m; do echo "=====[ $SECONDS seconds, still building rpi image... ]====="; done &
             #- tail -f f_out &
-          - sudo ./build-SD-rpi.sh
+          - bash -x ./build-SD-rpi.sh
         -         
           env:
               JOB2
@@ -51,7 +51,7 @@ jobs:
           - sed -i "/innodb_file_format=barracuda/a open_files_limit=65536" lamp.sh
           - while sleep 9m; do echo "=====[ $SECONDS seconds, still building armbian image... ]====="; done &
             #- tail -f f_output &
-          - ./build-SD-armbian.sh odroidxu4 OdroidHC2 #> f_output
+          - bash -x ./build-SD-armbian.sh odroidxu4 OdroidHC2 #> f_output
           
 notifications:
   email: false
