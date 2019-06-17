@@ -52,7 +52,7 @@ jobs:
           - sed -i "/innodb_file_format=barracuda/a open_files_limit=65536" lamp.sh
           - while sleep 9m; do echo "=====[ $SECONDS seconds, still building armbian image... ]====="; done &
           - tail -f output &
-          - ./build-SD-armbian.sh odroidxu4 OdroidHC2
+          - ./build-SD-armbian.sh odroidxu4 OdroidHC2 > output
           
 notifications:
   email: false
