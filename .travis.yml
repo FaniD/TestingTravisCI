@@ -10,6 +10,11 @@ jobs:
               JOB1
           install:
           - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
+          - sudo ls /usr/bin/locale
+          - sudo ls /usr/bin | grep locale
+          - sudo apt-get purge locales
+          - sudo aptitude install locales
+
           - sudo locale-gen en_US.UTF-8
           - export LANGUAGE="en_US.UTF-8"
           - export LANG="en_US.UTF-8"
