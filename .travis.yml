@@ -10,6 +10,7 @@ jobs:
               JOB1
           install:
           - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
+          - sudo ls /etc/ | grep php
           - sudo ls /usr/bin/locale
           - sudo ls /usr/bin | grep locale
           - sudo apt-get purge locales
