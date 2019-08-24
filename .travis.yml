@@ -40,7 +40,7 @@ jobs:
           script:
           - git clone https://github.com/nextcloud/nextcloudpi.git
           - git checkout devel
-          - cp nextcloudpi/.gitignore .
+          - cd nextcloudpi
           - sed -i "s/create_torrent/#create_torrent/" build-SD-rpi.sh
           - sed -i "s/upload_ftp/#upload_ftp/" build-SD-rpi.sh
           - sed -i "/innodb_file_format=barracuda/a open_files_limit=65536" lamp.sh
@@ -53,8 +53,7 @@ jobs:
           script:  
           - git clone https://github.com/nextcloud/nextcloudpi.git
           - git checkout devel
-            #- cd gsoc2019-NextCloudPi
-          - cp nextcloudpi/.gitignore .
+          - cd nextcloudpi
           - sed -i "s/create_torrent/#create_torrent/" build-SD-armbian.sh
           - sed -i "s/upload_ftp/#upload_ftp/" build-SD-armbian.sh
           - sed -i "/innodb_file_format=barracuda/a open_files_limit=65536" lamp.sh
