@@ -39,8 +39,8 @@ jobs:
             #          - sudo sed -i "" /etc/local.gen
           script:
           - git clone https://github.com/nextcloud/nextcloudpi.git
-          - git checkout devel
           - cd nextcloudpi
+          - git checkout devel
           - sed -i "s/create_torrent/#create_torrent/" build-SD-rpi.sh
           - sed -i "s/upload_ftp/#upload_ftp/" build-SD-rpi.sh
           - sed -i "/innodb_file_format=barracuda/a open_files_limit=65536" lamp.sh
@@ -52,8 +52,8 @@ jobs:
               JOB2
           script:  
           - git clone https://github.com/nextcloud/nextcloudpi.git
-          - git checkout devel
           - cd nextcloudpi
+          - git checkout devel
           - sed -i "s/create_torrent/#create_torrent/" build-SD-armbian.sh
           - sed -i "s/upload_ftp/#upload_ftp/" build-SD-armbian.sh
           - sed -i "/innodb_file_format=barracuda/a open_files_limit=65536" lamp.sh
