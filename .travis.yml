@@ -9,7 +9,7 @@ jobs:
           env:
               JOB1
           install:
-                  #          - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
+          - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
                   #          - sudo apt-get install php7.2 php7.2-cli php7.2-common
                   #- php -v
                   # - sudo ls /etc/
