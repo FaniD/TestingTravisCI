@@ -35,10 +35,10 @@ jobs:
           - sed -i '/open_files_limit=65536/d' lamp.sh
           - DOCKER_BUILDKIT=1 docker build . -f docker/nextcloud/Dockerfile -t ownyourbits/nextcloud-amd64:latest --build-arg arch=amd64 > output
           - DOCKER_BUILDKIT=1 docker build . -f docker/nextcloudpi/Dockerfile -t ownyourbits/nextcloudpi-amd64:latest --build-arg arch=amd64 > output
-          - docker save --output docker_cached/debian-ncp-amd64.tar ownyourbits/debian-ncp-amd64:latest
-          - docker save --output docker_cached/lamp-amd64.tar ownyourbits/lamp-amd64:latest
-          - docker save --output docker_cached/nextcloud-amd64.tar ownyourbits/nextcloud-amd64:latest
-          - docker save --output docker_cached/nextcloudpi-amd64.tar ownyourbits/nextcloudpi-amd64:latest
+          - docker save --output ../docker_cached/debian-ncp-amd64.tar ownyourbits/debian-ncp-amd64:latest
+          - docker save --output ../docker_cached/lamp-amd64.tar ownyourbits/lamp-amd64:latest
+          - docker save --output ../docker_cached/nextcloud-amd64.tar ownyourbits/nextcloud-amd64:latest
+          - docker save --output ../docker_cached/nextcloudpi-amd64.tar ownyourbits/nextcloudpi-amd64:latest
 
         - 
           ### armhf Docker images
@@ -60,8 +60,8 @@ jobs:
           - tail -f output &
           - DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-armhf:latest --build-arg arch=armhf > output
           - sed -i '/open_files_limit=65536/d' lamp.sh
-          - docker save --output docker_cached/debian-ncp-armhf.tar ownyourbits/debian-ncp-armhf:latest
-          - docker save --output docker_cached/lamp-armhf.tar ownyourbits/lamp-armhf:latest
+          - docker save --output ../docker_cached/debian-ncp-armhf.tar ownyourbits/debian-ncp-armhf:latest
+          - docker save --output ../docker_cached/lamp-armhf.tar ownyourbits/lamp-armhf:latest
 
         -
           ### arm64 Docker images
@@ -83,8 +83,8 @@ jobs:
           - tail -f output &
           - DOCKER_BUILDKIT=1 docker build . -f docker/lamp/Dockerfile -t ownyourbits/lamp-arm64v8:latest --build-arg arch=arm64v8 > output
           - sed -i '/open_files_limit=65536/d' lamp.sh
-          - docker save --output docker_cached/debian-ncp-arm64v8.tar ownyourbits/debian-ncp-arm64v8:latest
-          - docker save --output docker_cached/lamp-arm64v8.tar ownyourbits/lamp-arm64v8:latest
+          - docker save --output ../docker_cached/debian-ncp-arm64v8.tar ownyourbits/debian-ncp-arm64v8:latest
+          - docker save --output ../docker_cached/lamp-arm64v8.tar ownyourbits/lamp-arm64v8:latest
 
         - stage: building_part2
 
@@ -102,14 +102,14 @@ jobs:
 
           before_script:
           - cd nextcloudpi
-          - docker load --input docker_cached/lamp-armhf.tar
+          - docker load --input ../docker_cached/lamp-armhf.tar
 
           script: 
           - while sleep 9m; do echo "=====[ $SECONDS seconds, build-docker still building... ]====="; done &
           - DOCKER_BUILDKIT=1 docker build . -f docker/nextcloud/Dockerfile -t ownyourbits/nextcloud-armhf:latest --build-arg arch=armhf > output
           - DOCKER_BUILDKIT=1 docker build . -f docker/nextcloudpi/Dockerfile -t ownyourbits/nextcloudpi-armhf:latest --build-arg arch=armhf > output
-          - docker save --output docker_cached/nextcloud-armhf.tar ownyourbits/nextcloud-armhf:latest
-          - docker save --output docker_cached/nextcloudpi-armhf.tar ownyourbits/nextcloudpi-armhf:latest
+          - docker save --output ../docker_cached/nextcloud-armhf.tar ownyourbits/nextcloud-armhf:latest
+          - docker save --output ../docker_cached/nextcloudpi-armhf.tar ownyourbits/nextcloudpi-armhf:latest
         -
           ### arm64v8 Docker images
           env:
@@ -123,14 +123,14 @@ jobs:
 
           before_script:
           - cd nextcloudpi
-          - docker load --input docker_cached/lamp-arm64v8.tar
+          - docker load --input ../docker_cached/lamp-arm64v8.tar
 
           script: 
           - while sleep 9m; do echo "=====[ $SECONDS seconds, build-docker still building... ]====="; done &
           - DOCKER_BUILDKIT=1 docker build . -f docker/nextcloud/Dockerfile -t ownyourbits/nextcloud-arm64v8:latest --build-arg arch=arm64v8 > output
           - DOCKER_BUILDKIT=1 docker build . -f docker/nextcloudpi/Dockerfile -t ownyourbits/nextcloudpi-arm64v8:latest --build-arg arch=arm64v8 > output
-          - docker save --output docker_cached/nextcloud-arm64v8.tar ownyourbits/nextcloud-arm64v8:latest
-          - docker save --output docker_cached/nextcloudpi-arm64v8.tar ownyourbits/nextcloudpi-arm64v8:latest
+          - docker save --output ../docker_cached/nextcloud-arm64v8.tar ownyourbits/nextcloud-arm64v8:latest
+          - docker save --output ../docker_cached/nextcloudpi-arm64v8.tar ownyourbits/nextcloudpi-arm64v8:latest
 
         - stage: testing
 
@@ -151,7 +151,7 @@ jobs:
           - export PATH=$PATH:$PWD
             
           before_script:
-          - docker load --input docker_cached/nextcloudpi-amd64.tar
+          - docker load --input ../docker_cached/nextcloudpi-amd64.tar
           - IP=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
           - docker run -d -p 4443:4443 -p 443:443 -p 80:80 -v ncdata:/data --name nextcloudpi ownyourbits/nextcloudpi-amd64:latest ${IP}
 
@@ -182,7 +182,7 @@ jobs:
           - export PATH=$PATH:$PWD
             
           before_script:
-          - docker load --input docker_cached/nextcloudpi-armhf.tar
+          - docker load --input ../docker_cached/nextcloudpi-armhf.tar
           - IP=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
           - docker run -d -p 4443:4443 -p 443:443 -p 80:80 -v ncdata:/data --name nextcloudpi ownyourbits/nextcloudpi-armhf:latest ${IP}
 
@@ -213,7 +213,7 @@ jobs:
           - export PATH=$PATH:$PWD
             
           before_script:
-          - docker load --input docker_cached/nextcloudpi-arm64v8.tar
+          - docker load --input ../docker_cached/nextcloudpi-arm64v8.tar
           - IP=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
           - docker run -d -p 4443:4443 -p 443:443 -p 80:80 -v ncdata:/data --name nextcloudpi ownyourbits/nextcloudpi-arm64v8:latest ${IP}
 
