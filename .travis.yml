@@ -26,6 +26,7 @@ jobs:
           - docker version #Check Docker 18.09 is installed
 
           script:
+          - git clone https://github.com/nextcloud/nextcloudpi.git
           - cd nextcloudpi
           - while sleep 9m; do echo "=====[ $SECONDS seconds, build-docker still building... ]====="; done & 
           - DOCKER_BUILDKIT=1 docker build . -f docker/debian-ncp/Dockerfile -t ownyourbits/debian-ncp-amd64:latest --pull --build-arg arch=amd64 --build-arg arch_qemu=x86_64 > output
@@ -44,6 +45,7 @@ jobs:
           env:
               CACHE_NAME=ARMHF
           install:
+          - git clone https://github.com/nextcloud/nextcloudpi.git
           - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
           - ./.travis/configure_docker.sh #upgrading docker and installing packages for arm architecture
           - export DOCKER_CLI_EXPERIMENTAL=enabled #enable experimental features
@@ -66,6 +68,7 @@ jobs:
           env:
               CACHE_NAME=ARM64
           install:
+          - git clone https://github.com/nextcloud/nextcloudpi.git
           - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
           - ./.travis/configure_docker.sh #upgrading docker and installing packages for arm architecture
           - export DOCKER_CLI_EXPERIMENTAL=enabled #enable experimental features
@@ -91,6 +94,7 @@ jobs:
           env:
               CACHE_NAME=ARMHF
           install:
+          - git clone https://github.com/nextcloud/nextcloudpi.git
           - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
           - ./.travis/configure_docker.sh #upgrading docker and installing packages for arm architecture
           - export DOCKER_CLI_EXPERIMENTAL=enabled #enable experimental features
@@ -111,6 +115,7 @@ jobs:
           env:
               CACHE_NAME=ARM64
           install:
+          - git clone https://github.com/nextcloud/nextcloudpi.git
           - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
           - ./.travis/configure_docker.sh #upgrading docker and installing packages for arm architecture
           - export DOCKER_CLI_EXPERIMENTAL=enabled #enable experimental features
@@ -133,6 +138,7 @@ jobs:
           env:
               CACHE_NAME=X86
           install:
+          - git clone https://github.com/nextcloud/nextcloudpi.git
           - cd nextcloudpi
           - ./../.travis/configure_docker.sh
           - export DOCKER_CLI_EXPERIMENTAL=enabled #enable experimental features      
@@ -162,6 +168,7 @@ jobs:
           env:
               CACHE_NAME=ARMHF
           install:
+          - git clone https://github.com/nextcloud/nextcloudpi.git
           - cd nextcloudpi
           - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
           - ./../.travis/configure_docker.sh
@@ -192,6 +199,7 @@ jobs:
           env:
               CACHE_NAME=ARM64
           install:
+          - git clone https://github.com/nextcloud/nextcloudpi.git
           - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
           - ./.travis/configure_docker.sh
           - cd nextcloudpi
